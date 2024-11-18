@@ -5,12 +5,17 @@ using UnityEngine;
 
 public class ButtonManager : MonoBehaviour
 {
+    /// <summary>
+    /// Cockatiel Removed due to time constraints. Commented code out to for documentation purposes.
+    /// </summary>
+
+
     [SerializeField] private GameObject budgieStats;
-    [SerializeField] private GameObject cockatielStats;
+    // [SerializeField] private GameObject cockatielStats;
     [SerializeField] private GameObject budgieActivityBar;
-    [SerializeField] private GameObject cockatielActivityBar;
+    // [SerializeField] private GameObject cockatielActivityBar;
     [SerializeField] private GameObject activtyButtonBudgie;
-    [SerializeField] private GameObject activtyButtonCockatiel;
+    // [SerializeField] private GameObject activtyButtonCockatiel;
 
     private void Update()
     {
@@ -21,20 +26,20 @@ public class ButtonManager : MonoBehaviour
             {
                 budgieStats.SetActive(false);
             }
-            if (cockatielStats.activeSelf && activtyButtonCockatiel.activeSelf)
+           /* if (cockatielStats.activeSelf && activtyButtonCockatiel.activeSelf)
             {
                 cockatielStats.SetActive(false);
-            }
+            } */
             if (budgieActivityBar.activeSelf)
             {
                 budgieActivityBar.SetActive(false);
                 activtyButtonBudgie.SetActive(true);
             }
-            if (cockatielActivityBar.activeSelf)
+          /*  if (cockatielActivityBar.activeSelf)
             {
                 cockatielActivityBar.SetActive(false);
                 activtyButtonCockatiel.SetActive(true);
-            }
+            } */
         }
     }
 
@@ -45,11 +50,11 @@ public class ButtonManager : MonoBehaviour
         budgieStats.SetActive(true);
     }
 
-    public void OpenCockatielStats()
+   /* public void OpenCockatielStats()
     {
         //Opens Cockatiel Stat Menu
         cockatielStats.SetActive(true);
-    }
+    }*/
 
     public void CloseBudgieStats()
     {
@@ -57,11 +62,11 @@ public class ButtonManager : MonoBehaviour
         budgieStats.SetActive(false);
     }
 
-    public void CloseCockatielStats()
+   /* public void CloseCockatielStats()
     {
         //Closes Cockatiel Stat Menu
         cockatielStats.SetActive(false);
-    }
+    } */
 
     public void OpenActivityBarBudgie()
     {
@@ -70,12 +75,12 @@ public class ButtonManager : MonoBehaviour
         activtyButtonBudgie.SetActive(false);
     }
 
-    public void OpenActivityBarCockatiel()
+   /* public void OpenActivityBarCockatiel()
     {
         //Opens Bird Activity Bar and Hides Activity Button
         cockatielActivityBar.SetActive(true);
         activtyButtonCockatiel.SetActive(false);   
-    }
+    } */
 
     public void CloseActivityBarBudgie()
     {
@@ -84,11 +89,11 @@ public class ButtonManager : MonoBehaviour
         activtyButtonBudgie.SetActive(true);
     }
 
-    public void CloseActivityBarCockatiel()
+   /* public void CloseActivityBarCockatiel()
     {
         //Close Bird Activity Bar and Show Activity Button
         cockatielActivityBar.SetActive(false);
         activtyButtonCockatiel.SetActive(true);
-    }
+    } */
 
 }
