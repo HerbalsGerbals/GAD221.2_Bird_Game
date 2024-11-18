@@ -1,7 +1,9 @@
 using Newtonsoft.Json.Bson;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour
 {
@@ -16,6 +18,15 @@ public class ButtonManager : MonoBehaviour
     // [SerializeField] private GameObject cockatielActivityBar;
     [SerializeField] private GameObject activtyButtonBudgie;
     // [SerializeField] private GameObject activtyButtonCockatiel;
+
+    private void Start()
+    {
+        //Makes sure stats aren't showing when switching scenes back.
+        budgieStats.SetActive(false);
+        //Makes sure activity bar isn't still on when switching scenes back and activity button is showing.
+        budgieActivityBar.SetActive(false);
+        activtyButtonBudgie.SetActive(true);
+    }
 
     private void Update()
     {
@@ -96,4 +107,21 @@ public class ButtonManager : MonoBehaviour
         activtyButtonCockatiel.SetActive(true);
     } */
 
+    public void LoadMiniGame1()
+    {
+        //Loads Mini Game 1 Scene
+        SceneManager.LoadScene(1);
+    }
+
+    public void LoadMiniGame2()
+    {
+        //Load Mini Game 2 Scene
+        SceneManager.LoadScene(2);
+    }
+
+    public void LoadMiniGame3()
+    { 
+        //Load Mini Game 3 Scene
+        SceneManager.LoadScene(3);
+    }
 }
