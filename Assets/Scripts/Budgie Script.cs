@@ -28,75 +28,9 @@ public class BudgieScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        /*
-        thirst = UIBudgieManager.thirst;
-        cleanliness = UIBudgieManager.clean;
-        enrich = UIBudgieManager.enrich;
-        hunger = UIBudgieManager.hunger;
-        */
-        CreateBudgieStats();
+
     }
 
-
-    public void CreateBudgieStats()
-    {
-        //PlayerPrefs used to allow stats of bird to not change throughout scene changes
-
-        //Checks if Budgie has the Key "BudgieWellbeingStat" if not sets wellbeing stat to random range between 10-40.
-        if (!PlayerPrefs.HasKey("BudgieThirstStat"))
-        {
-            thirst = Random.Range(10, 40);
-            PlayerPrefs.SetFloat("BudgieThirstStat", thirst);
-            textManager.wellbeingStat.text = "Thirst " + thirst + "/100";
-        }
-        //If the Budgie has the Key will keep wellbeing stat as the last digit in dictonary.
-        else
-        {
-            thirst = PlayerPrefs.GetFloat("BudgieThirstStat");
-            textManager.wellbeingStat.text = "Thirst " + thirst + "/100";
-        }
-
-        //Checks if Budgie has the Key "BudgieCleanlinessStat" if not sets wellbeing stat to random range between 0-50.
-        if (!PlayerPrefs.HasKey("BudgieCleanlinessStat"))
-        {
-            cleanliness = Random.Range(0, 50);
-            PlayerPrefs.SetFloat("BudgieCleanlinessStat", cleanliness);
-            textManager.cleanlinessStat.text = "Cleanliness " + cleanliness + "/100";
-        }
-        //If the Budgie has the Key will keep cleanliness stat as the last digit in dictonary.
-        else
-        {
-            cleanliness = PlayerPrefs.GetFloat("BudgieCleanlinessStat");
-            textManager.cleanlinessStat.text = "Cleanliness " + cleanliness + "/100";
-        }
-
-        //Checks if Budgie has the Key "BudgieHungerStat" if not sets hunger stat to random range between 20-40.
-        if (!PlayerPrefs.HasKey("BudgieHungerStat"))
-        {
-            hunger = Random.Range(20, 40);
-            PlayerPrefs.SetFloat("BudgieHungerStat", hunger);
-            textManager.hungerStat.text = "Hunger " + hunger + "/100";
-        }
-        //If the Budgie has the Key will keep hunger stat as the last digit in dictonary.
-        else
-        {
-            hunger = PlayerPrefs.GetFloat("BudgieHungerStat");
-            textManager.hungerStat.text = "Hunger " + hunger + "/100";
-        }
-        //Checks if Budgie has the Key "BudgieRecoveryStat" if not sets Recovery stat to 0.
-        if (!PlayerPrefs.HasKey("BudgieRecoveryStat"))
-        {
-            enrich = 0;
-            PlayerPrefs.SetFloat("BudgieEnrichmentStat", enrich);
-            textManager.recoveryStat.text = "Enrichment " + enrich + "/100";
-        }
-        //If the Budgie has the Key will keep recovery stat as the last digit in dictonary.
-        else
-        {
-            enrich = PlayerPrefs.GetFloat("BudgieRecoveryStat");
-            textManager.recoveryStat.text = "Enrichment " + enrich + "/100";
-        }
-    }
 
     public void ThirstMiniGameStatChanges()
     {
