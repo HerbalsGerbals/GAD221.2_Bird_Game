@@ -2301,7 +2301,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1633580572}
         m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
-        m_MethodName: LoadMiniGame3
+        m_MethodName: LoadMiniGame1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
