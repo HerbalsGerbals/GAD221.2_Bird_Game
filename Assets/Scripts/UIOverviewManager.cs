@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
-public class UIManager : MonoBehaviour
+public class UIOverViewManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> healthIcons;
     [SerializeField] List<Sprite> healthLevel;
@@ -40,98 +40,42 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] List<TextMeshProUGUI> birdName;
 
-    BudgieScript budgieScript;
+    public BudgieStats budgieStats;
+    ButtonManager buttonManager;
 
     [SerializeField] bool hasInjury; //DELETE ONCE INTEGRATED - WILL USE VARAIBLE FROM BIRD SCRIPT INSTEAD
 
     private void Start()
     {
-        CreateBudgieStats();
+        hunger = budgieStats.hunger;
+        thirst = budgieStats.thirst;
+        clean = budgieStats.clean;
+        enrich = budgieStats.enrich;
 
         foreach (TextMeshProUGUI text in birdName)
         {
             text.text = "Bugderigar"; //Sets name for bird, currently sets automatically for one bird playtest, could be set via bird script for multiple bird prefabs                      
         }
-
     }
 
-    public void CreateBudgieStats()
-    {
-        //PlayerPrefs used to allow stats of bird to not change throughout scene changes
 
-        //Checks if Budgie has the Key "BudgieHungerStat" if not sets hunger stat to random range between 20-40.
-        if (!PlayerPrefs.HasKey("BudgieHungerStat"))
-        {
-            hunger = Random.Range(10, 30);
-            PlayerPrefs.SetFloat("BudgieHungerStat", hunger);
-            statSlider[0].value = hunger;
-        }
-        //If the Budgie has the Key will keep hunger stat as the last digit in dictonary.
-        else
-        {
-            hunger = PlayerPrefs.GetFloat("BudgieHungerStat");
-        }
-
-        //Checks if Budgie has the Key "BudgieWellbeingStat" if not sets wellbeing stat to random range between 10-40.
-        if (!PlayerPrefs.HasKey("BudgieThirstStat"))
-        {
-            thirst = Random.Range(10, 40);
-            PlayerPrefs.SetFloat("BudgieThirstStat", thirst);
-            statSlider[1].value = thirst;
-
-        }
-        //If the Budgie has the Key will keep wellbeing stat as the last digit in dictonary.
-        else
-        {
-            thirst = PlayerPrefs.GetFloat("BudgieThirstStat");
-
-        }
-
-        //Checks if Budgie has the Key "BudgieCleanlinessStat" if not sets wellbeing stat to random range between 0-50.
-        if (!PlayerPrefs.HasKey("BudgieCleanlinessStat"))
-        {
-            clean = Random.Range(0, 50);
-            PlayerPrefs.SetFloat("BudgieCleanlinessStat", clean);
-            statSlider[2].value = clean;
-        }
-        //If the Budgie has the Key will keep cleanliness stat as the last digit in dictonary.
-        else
-        {
-            clean = PlayerPrefs.GetFloat("BudgieCleanlinessStat");
-        }
-       
-        //Checks if Budgie has the Key "BudgieRecoveryStat" if not sets Recovery stat to 0.
-        if (!PlayerPrefs.HasKey("BudgieRecoveryStat"))
-        {
-            enrich = Random.Range(0, 30);
-            PlayerPrefs.SetFloat("BudgieEnrichmentStat", enrich);
-        }
-        //If the Budgie has the Key will keep recovery stat as the last digit in dictonary.
-        else
-        {
-            enrich = PlayerPrefs.GetFloat("BudgieRecoveryStat");
-            statSlider[3].value = enrich;
-        }
-
-    }
 
     private void Update()
     {
         SliderSet();
 
-        
-        
+
+
         IconCheck(health, healthIcons, healthLevel); //Runs icon check using health stat and icons
         IconCheck(hunger, hungerIcons, hungerLevel); //Runs icon check using hunger stat and icons
         IconCheck(thirst, thirstIcons, thirstLevel); //Runs icon check using thirst stat and icons
         IconCheck(clean, cleanIcons, cleanLevel); //Runs icon check using clean stat and icons
         IconCheck(enrich, enrichIcons, enrichLevel); //Runs icon check using enrich stat and icons
-        
+
         InjuryCheck();
 
         AdoptCheck();
-
-    }
+    } 
 
     #region Icon and Slider Settings
 
@@ -166,10 +110,10 @@ public class UIManager : MonoBehaviour
 
     private void SliderSet() //updates the slider bars to reflect stat amount
     {
-        statSlider[0].value = hunger;
-        statSlider[1].value = thirst;
-        statSlider[2].value = clean;
-        statSlider[3].value = enrich;
+        statSlider[0].value = budgieStats.hunger;
+        statSlider[1].value = budgieStats.thirst;
+        statSlider[2].value = budgieStats.clean;
+        statSlider[3].value = budgieStats.enrich;
     }
 
     private void InjuryCheck()
@@ -236,11 +180,6 @@ public class UIManager : MonoBehaviour
         }
         else { adoptButt.interactable = false; } // adopt button is deactivatd unless minimum health is reached
 
-    }
-
-    public void TreatmentButtonClicked()
-    {
-        //Scene load to take bird to treatment area (minigame menu) ---------------------------------------------------------------------------------X
     }
 
     public void AdoptOutButtonClicked()

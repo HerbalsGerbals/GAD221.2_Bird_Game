@@ -5,10 +5,11 @@ using UnityEngine;
 public class Option2 : MonoBehaviour
 {
     public GameObject option2Panel;
+    public bool answeredQuestionTwo;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && answeredQuestionTwo == false)
         {
             option2Panel.SetActive(true);
             Debug.Log("Trigger");
@@ -20,6 +21,7 @@ public class Option2 : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             option2Panel.SetActive(false);
+            answeredQuestionTwo = true;
         }
     }
 

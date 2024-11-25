@@ -13,12 +13,13 @@ public class ButtonManager : MonoBehaviour
 
 
     [SerializeField] private GameObject budgieStats;
-    // [SerializeField] private GameObject cockatielStats;
+    // *REMOVED* [SerializeField] private GameObject cockatielStats;
     [SerializeField] private GameObject budgieActivityBar;
-    // [SerializeField] private GameObject cockatielActivityBar;
+    // *REMOVED* [SerializeField] private GameObject cockatielActivityBar;
     [SerializeField] private GameObject activtyButtonBudgie;
-    // [SerializeField] private GameObject activtyButtonCockatiel;
-
+    // *REMOVED* [SerializeField] private GameObject activtyButtonCockatiel;
+    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject instructions;
     private void Start()
     {
         //Makes sure stats aren't showing when switching scenes back.
@@ -31,28 +32,43 @@ public class ButtonManager : MonoBehaviour
     private void Update()
     {
         //Closes Menus with escape key at any point (Just a quick Hack to make this work)
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (budgieStats.activeSelf && activtyButtonBudgie.activeSelf)
             {
                 budgieStats.SetActive(false);
             }
-           /* if (cockatielStats.activeSelf && activtyButtonCockatiel.activeSelf)
-            {
-                cockatielStats.SetActive(false);
-            } */
+
+            /* *REMOVED* if (cockatielStats.activeSelf && activtyButtonCockatiel.activeSelf)
+             {
+                 cockatielStats.SetActive(false);
+             } */
+
             if (budgieActivityBar.activeSelf)
             {
                 budgieActivityBar.SetActive(false);
                 activtyButtonBudgie.SetActive(true);
             }
-          /*  if (cockatielActivityBar.activeSelf)
+
+            /* *REMOVED*  if (cockatielActivityBar.activeSelf)
+              {
+                  cockatielActivityBar.SetActive(false);
+                  activtyButtonCockatiel.SetActive(true);
+              } */
+
+            if (pauseMenu.activeSelf && instructions.activeSelf == false)
             {
-                cockatielActivityBar.SetActive(false);
-                activtyButtonCockatiel.SetActive(true);
-            } */
+                pauseMenu.SetActive(false);
+            }
+
+            if (instructions.activeSelf)
+            {
+                instructions.SetActive(false);
+            }
         }
+
     }
+
 
     //Stat Menu Open and Close Functions. Need to combine into 1 stat menu when bird adopting is added and stats are pulled directly from each bird
     public void OpenBudgieStats()
@@ -61,11 +77,11 @@ public class ButtonManager : MonoBehaviour
         budgieStats.SetActive(true);
     }
 
-   /* public void OpenCockatielStats()
-    {
-        //Opens Cockatiel Stat Menu
-        cockatielStats.SetActive(true);
-    }*/
+    /* *REMOVED* public void OpenCockatielStats()
+     {
+         //Opens Cockatiel Stat Menu
+         cockatielStats.SetActive(true);
+     }*/
 
     public void CloseBudgieStats()
     {
@@ -73,11 +89,11 @@ public class ButtonManager : MonoBehaviour
         budgieStats.SetActive(false);
     }
 
-   /* public void CloseCockatielStats()
-    {
-        //Closes Cockatiel Stat Menu
-        cockatielStats.SetActive(false);
-    } */
+    /* *REMOVED* public void CloseCockatielStats()
+     {
+         //Closes Cockatiel Stat Menu
+         cockatielStats.SetActive(false);
+     } */
 
     public void OpenActivityBarBudgie()
     {
@@ -86,12 +102,12 @@ public class ButtonManager : MonoBehaviour
         activtyButtonBudgie.SetActive(false);
     }
 
-   /* public void OpenActivityBarCockatiel()
-    {
-        //Opens Bird Activity Bar and Hides Activity Button
-        cockatielActivityBar.SetActive(true);
-        activtyButtonCockatiel.SetActive(false);   
-    } */
+    /* *REMOVED* public void OpenActivityBarCockatiel()
+     {
+         //Opens Bird Activity Bar and Hides Activity Button
+         cockatielActivityBar.SetActive(true);
+         activtyButtonCockatiel.SetActive(false);   
+     } */
 
     public void CloseActivityBarBudgie()
     {
@@ -100,13 +116,37 @@ public class ButtonManager : MonoBehaviour
         activtyButtonBudgie.SetActive(true);
     }
 
-   /* public void CloseActivityBarCockatiel()
-    {
-        //Close Bird Activity Bar and Show Activity Button
-        cockatielActivityBar.SetActive(false);
-        activtyButtonCockatiel.SetActive(true);
-    } */
+    /* *REMOVED* public void CloseActivityBarCockatiel()
+     {
+         //Close Bird Activity Bar and Show Activity Button
+         cockatielActivityBar.SetActive(false);
+         activtyButtonCockatiel.SetActive(true);
+     } */
 
+
+    public void OpenPauseMenu()
+    {
+        //Opens Pause Menu
+        pauseMenu.SetActive(true);
+    }
+
+    public void ClosePauseMenu()
+    {
+        //Closes Pause Menu
+        pauseMenu.SetActive(false);
+    }
+
+    public void OpenInstructions()
+    {
+        //Opens Instructions
+        instructions.SetActive(true);
+    }
+
+    public void CloseInstructions()
+    {
+        //Closes Instructions
+        instructions.SetActive(false);
+    }
     public void LoadMiniGame1()
     {
         //Loads Mini Game 1 Scene
@@ -120,8 +160,14 @@ public class ButtonManager : MonoBehaviour
     }
 
     public void LoadMiniGame3()
-    { 
+    {
         //Load Mini Game 3 Scene
         SceneManager.LoadScene(3);
+    }
+
+    public void CloseApplication()
+    {
+        //Closes Program
+        Application.Quit();
     }
 }
