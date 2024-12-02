@@ -64,8 +64,24 @@ public class MazeGame : MonoBehaviour
             player.SetActive(false);
             winScreen.SetActive(true);
             scoreText.text = score.ToString();
-           
-            
+            if (score == 0)
+            {
+                resultText.text = "Your Budgie friend seems to be upset at you.";
+            }
+            if (score == 1)
+            {
+                resultText.text = "It still seems like you have some more to learn about your Budgie friend.";
+            }
+            if (score == 2)
+            {
+                resultText.text = "Your Budgie seems quite pleased with your results!";
+            }
+            if (score == 3)
+            {
+                resultText.text = "Your Budgie is ecstatic with joy about ur results!";
+            }
+
+
         }
     }
 
@@ -73,22 +89,18 @@ public class MazeGame : MonoBehaviour
     {
         if (score == 0)
         {
-            resultText.text = "Your Budgie friend seems to be upset at you.";
             budgieStats.IncreaseBudgieEnrichStat(0);
         }
         if (score == 1)
         {
-            resultText.text = "It still seems like you have some more to learn about your Budgie friend.";
             budgieStats.IncreaseBudgieEnrichStat(20);
         }
         if (score == 2)
         {
-            resultText.text = "Your Budgie seems quite pleased with your results!";
             budgieStats.IncreaseBudgieEnrichStat(30);
         }
         if (score == 3)
         {
-            resultText.text = "Your Budgie is ecstatic with joy about ur results!";
             budgieStats.IncreaseBudgieEnrichStat(50);
         }
     }

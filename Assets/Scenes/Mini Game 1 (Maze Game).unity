@@ -12228,7 +12228,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Congrats On Beating THe Maze!
+  m_text: Congrats On Beating The Maze!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 98c3cab50d9902649afbd92cd3d1b3d2, type: 2}
   m_sharedMaterial: {fileID: -151429689369267543, guid: 98c3cab50d9902649afbd92cd3d1b3d2, type: 2}
@@ -12694,7 +12694,6 @@ MonoBehaviour:
   scoreText: {fileID: 1162356662}
   resultText: {fileID: 949780201}
   budgieStats: {fileID: 702481591}
-  goodScore: 50
 --- !u!4 &1389465199
 Transform:
   m_ObjectHideFlags: 0

@@ -96,6 +96,24 @@ public class BudgieStats : MonoBehaviour
         PlayerPrefs.SetFloat("BudgieEnrichmentStat", enrich);
     }
 
+    public void IncreaseBudgieHungerStat(float amount)
+    {
+        hunger += amount;
+        PlayerPrefs.SetFloat("BudgieHungerStat", hunger);
+    }
+
+    public void IncreaseBudgieThirstStat(float amount)
+    {
+        thirst += amount;
+        PlayerPrefs.SetFloat("BudgieThirstStat", thirst);
+    }
+
+    public void IncreaseBudgieCleanlinessStat(float amount)
+    {
+        clean += amount;
+        PlayerPrefs.SetFloat("BudgieCleanlinessStat", clean);
+    }
+
     private void OnApplicationQuit()
     {
         //On application closure delete the Player Pref Keys so when game is re-opened stats are refreshed

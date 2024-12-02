@@ -13,15 +13,22 @@ public class GameController : MonoBehaviour
     public const float offSetX = 4f;
     public const float offSetY = 5f;
 
-    [SerializeField] private Apple appleCard;
+    [SerializeField] private Almond almondCard;
     [SerializeField] private Sprite[] images;
-    private Apple firstRevealed;
-    private Apple secondRevealed;
+    private Almond firstRevealed;
+    private Almond secondRevealed;
 
     private int score = 0;
     [SerializeField] private TextMeshProUGUI scoreLabel;
     [SerializeField] private TextMeshProUGUI timerLabel;
-    public float timer = 60;
+    public float timer = 30;
+    
+    public bool isGameStarted = false;
+    [SerializeField] private GameObject introScreen;
+    [SerializeField] private GameObject endScreen;
+    public BudgieStats budgieStats;
+    public TextMeshProUGUI resultsTitleText;
+    public TextMeshProUGUI resultText;
     public bool canReveal
     {
         get { return secondRevealed == null; }
@@ -29,7 +36,7 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        Vector3 startPos = appleCard.transform.position;
+        Vector3 startPos = almondCard.transform.position;
 
         int[] numbers = { 0, 0, 1, 1, 2, 2, 3, 3, };
         numbers = ShuffleArray( numbers );
@@ -38,15 +45,15 @@ public class GameController : MonoBehaviour
         {
             for ( int j = 0; j < gridRows; j++ )
             {
-                Apple card;
+                Almond card;
 
                 if ( i == 0 && j == 0)
                 {
-                    card = appleCard;
+                    card = almondCard;
                 }
                 else
                 {
-                    card = Instantiate(appleCard) as Apple;
+                    card = Instantiate(almondCard) as Almond;
                 }
 
                 int index = j * gridCols + i;
@@ -75,7 +82,7 @@ public class GameController : MonoBehaviour
         return newArray;
     }
 
-    public void CardRevealed(Apple card)
+    public void CardRevealed(Almond card)
     {
         if (firstRevealed == null)
         {
@@ -110,12 +117,87 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        timer -= Time.deltaTime;
-        timerLabel.text = timer.ToString("F0") + "s";
-
-        if (timer <= 0)
+        if (isGameStarted == true)
         {
-            SceneManager.LoadScene(0);
+            timer -= Time.deltaTime;
+            timerLabel.text = timer.ToString("F0") + "s";
+
+            if (timer <= 0)
+            {
+                GameEnded();
+            }
+
+            if (score == 4)
+            {
+                GameEnded();
+            }
+        }
+    }
+
+    public void GameStarted()
+    {
+        introScreen.SetActive(false);
+        isGameStarted = true;
+    }
+
+    public void GameEnded()
+    {
+        isGameStarted = false;
+        endScreen.SetActive(true);
+        if (score == 0)
+        {
+            resultsTitleText.text = "You Failed To Make Any Matches";
+            resultText.text = "OOh Better Luck Next Time. Your Budgie Doesn't Gain Any Stat Increases";
+        }
+        if (score == 1)
+        {
+            resultsTitleText.text = "You Made 1 Match";
+            resultText.text = "Your Budgie Gains A Small Amount Of Stats.";
+        }
+        if (score == 2)
+        {
+            resultsTitleText.text = "You Made 2 Matches!";
+            resultText.text = "Your Budgie Gains A Moderate Amount Of Stats.";
+        }
+        if (score == 3)
+        {
+            resultsTitleText.text = "You Made 3 Matches!";
+            resultText.text = "Your Budgie Gets A Big Stat Increase!";
+        }
+        if (score == 4)
+        {
+            resultsTitleText.text = "Congrats You Matched All Of The Cards!";
+            resultText.text = "Your Budgie Gains A Major Stat Increase! Good Job!";
+        }
+    }
+
+    public void ReturnToMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void IncreaseBugdieStats()
+    {
+       
+        if (score == 1)
+        {
+            budgieStats.IncreaseBudgieHungerStat(5);
+            budgieStats.IncreaseBudgieThirstStat(5);
+        }
+        if (score == 2)
+        {
+            budgieStats.IncreaseBudgieHungerStat(15);
+            budgieStats.IncreaseBudgieThirstStat(15);
+        }
+        if (score == 3)
+        {
+            budgieStats.IncreaseBudgieHungerStat(25);
+            budgieStats.IncreaseBudgieThirstStat(25);
+        }
+        if(score == 4)
+        {
+            budgieStats.IncreaseBudgieHungerStat(40);
+            budgieStats.IncreaseBudgieThirstStat(40);
         }
     }
 }
