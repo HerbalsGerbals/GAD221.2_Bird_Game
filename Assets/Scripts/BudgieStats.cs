@@ -54,7 +54,7 @@ public class BudgieStats : MonoBehaviour
         //Checks if Budgie has the Key "BudgieCleanlinessStat" if not sets wellbeing stat to random range between 0-50.
         if (!PlayerPrefs.HasKey("BudgieCleanlinessStat"))
         {
-            clean = Random.Range(0, 50);
+            clean = Random.Range(10, 50);
             PlayerPrefs.SetFloat("BudgieCleanlinessStat", clean);
         }
         //If the Budgie has the Key will keep cleanliness stat as the last digit in dictonary.
@@ -66,7 +66,7 @@ public class BudgieStats : MonoBehaviour
         //Checks if Budgie has the Key "BudgieRecoveryStat" if not sets Recovery stat to 0.
         if (!PlayerPrefs.HasKey("BudgieEnrichmentStat"))
         {
-            enrich = Random.Range(0, 30);
+            enrich = Random.Range(10, 30);
             PlayerPrefs.SetFloat("BudgieEnrichmentStat", enrich);
         }
         //If the Budgie has the Key will keep recovery stat as the last digit in dictonary.

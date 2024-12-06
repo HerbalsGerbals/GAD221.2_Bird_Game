@@ -43,6 +43,8 @@ public class UIOverViewManager : MonoBehaviour
     public BudgieStats budgieStats;
     ButtonManager buttonManager;
 
+    [SerializeField] private GameObject endOfGameScreen;
+
     [SerializeField] bool hasInjury; //DELETE ONCE INTEGRATED - WILL USE VARAIBLE FROM BIRD SCRIPT INSTEAD
 
     private void Start()
@@ -64,7 +66,7 @@ public class UIOverViewManager : MonoBehaviour
     {
         SliderSet();
 
-
+        HealthStatUpdate();
 
         IconCheck(health, healthIcons, healthLevel); //Runs icon check using health stat and icons
         IconCheck(hunger, hungerIcons, hungerLevel); //Runs icon check using hunger stat and icons
@@ -108,12 +110,29 @@ public class UIOverViewManager : MonoBehaviour
 
     }
 
+    public void HealthStatUpdate()
+    {
+        //Updates health based on total of other stats.
+        if (hunger >= 30 && clean >= 30 && enrich >= 30 && thirst >= 30)
+        {
+            health = 30; //Icon will turn orange.
+        }
+        if (hunger >= 50 && clean >= 50 && enrich >= 50 && thirst >= 50)
+        {
+            health = 50; //Icon will turn Yellow.
+        }
+        if (hunger >= 100 && clean >= 100 && enrich >= 100 && thirst >= 100)
+        {
+            health = 100; //icon will turn green and make bird adoptable.
+        }
+    }
+
     private void SliderSet() //updates the slider bars to reflect stat amount
     {
-        statSlider[0].value = budgieStats.hunger;
-        statSlider[1].value = budgieStats.thirst;
-        statSlider[2].value = budgieStats.clean;
-        statSlider[3].value = budgieStats.enrich;
+        statSlider[0].value = hunger;
+        statSlider[1].value = thirst;
+        statSlider[2].value = clean;
+        statSlider[3].value = enrich;
     }
 
     private void InjuryCheck()
@@ -174,7 +193,7 @@ public class UIOverViewManager : MonoBehaviour
     public void AdoptCheck()
     {
         //may need to change what causes adoption to be available, either all stats in green or overall health minimum -------------X
-        if (health > 80)
+        if (health == 100)
         {
             adoptButt.interactable = true;
         }
@@ -185,6 +204,7 @@ public class UIOverViewManager : MonoBehaviour
     public void AdoptOutButtonClicked()
     {
         //Adopt out bird, ends the game --------------------------------------------------------------------------------------------X
+        endOfGameScreen.SetActive(true);
     }
 
     #endregion
